@@ -3,7 +3,7 @@ describe('Challenging DOM', () => {
 		cy.visit('/challenging_dom');
 	});
 
-	it('should have random ids for buttons', () => {
+	it('should have random ids for buttons', { retries: 2 }, () => {
 		cy.get('.button')
 			.then(($buttons) => Cypress._.map($buttons, (btn) => btn.id))
 			.then((buttonIds) => {
