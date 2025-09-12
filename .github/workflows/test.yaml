@@ -13,7 +13,8 @@ jobs:
         run: |
           docker run -d -p 7080:5000 gprestes/the-internet
 
-      - name: Cypress run
+      - name: Cypress run on ${{ matrix.browser }}
         uses: cypress-io/github-action@v6
         with:
           build: npm run build
+          browser: ${{ matrix.browser }}
