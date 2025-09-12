@@ -13,8 +13,10 @@ describe('Challenging DOM', () => {
 						Cypress._.map($buttons, (btn) => btn.id),
 					)
 					.then((buttonIds2) => {
-                        cy.log('Button IDs before reload:',
-                            buttonIds.join(', '));
+						cy.log(
+							'Button IDs before reload:',
+							buttonIds.join(', '),
+						);
 						cy.log(
 							'Button IDs after reload:',
 							buttonIds2.join(', '),
