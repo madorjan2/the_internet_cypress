@@ -54,7 +54,7 @@ describe('Challenging DOM', () => {
 							.split("'")[0]
 							.replace(',', '');
 						cy.log(`Solution from DOM: ${numberFromScript}`);
-						cy.log(`OCR number:, ${ocrNumber}`);
+						cy.log(`OCR number: ${ocrNumber}`);
 						expect(ocrNumber).to.equal(numberFromScript);
 					});
 				},
