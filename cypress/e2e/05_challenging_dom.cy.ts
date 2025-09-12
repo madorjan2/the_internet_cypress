@@ -7,13 +7,14 @@ describe('Challenging DOM', () => {
 		cy.get('.button')
 			.then(($buttons) => Cypress._.map($buttons, (btn) => btn.id))
 			.then((buttonIds) => {
-				cy.log('Button IDs:', buttonIds.join(', '));
 				cy.reload();
 				cy.get('.button')
 					.then(($buttons) =>
 						Cypress._.map($buttons, (btn) => btn.id),
 					)
 					.then((buttonIds2) => {
+                        cy.log('Button IDs before reload:',
+                            buttonIds.join(', '));
 						cy.log(
 							'Button IDs after reload:',
 							buttonIds2.join(', '),
