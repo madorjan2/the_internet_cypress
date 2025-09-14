@@ -1,7 +1,7 @@
 import { defineConfig } from 'cypress';
 import { readCSV } from './cypress/tasks/fileTasks';
 import { recognizeNumber } from './cypress/tasks/recognizeNumber';
-import { handleDigestAuth} from "./cypress/tasks/handleDigestAuth";
+import { handleDigestAuth } from './cypress/tasks/handleDigestAuth';
 
 export default defineConfig({
 	e2e: {
@@ -10,7 +10,7 @@ export default defineConfig({
 			on('task', {
 				readCSV,
 				recognizeNumber,
-                handleDigestAuth,
+				handleDigestAuth,
 			});
 		},
 		env: {
