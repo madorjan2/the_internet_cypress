@@ -1,6 +1,4 @@
 describe('Basic Auth', () => {
-	beforeEach(() => {});
-
 	it('should log in via basic auth after intercepting request', () => {
 		cy.intercept('GET', '/basic_auth/', (req) => {
 			const credentials: string = btoa('admin:admin');
