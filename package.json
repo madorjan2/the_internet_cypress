@@ -15,7 +15,8 @@
 		"cypress": "^15.2.0",
 		"cypress-plugin-retries": "^1.5.2",
 		"eslint-config-prettier": "^10.1.8",
-		"tesseract.js": "^6.0.1"
+		"tesseract.js": "^6.0.1",
+		"urllib": "^4.8.2"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^8.43.0",

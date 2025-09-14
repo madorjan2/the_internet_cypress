@@ -1,29 +1,33 @@
-describe('Basic Auth', () => {
-	beforeEach(() => {});
+describe('Digest Authentication - Simplified approach', () => {
+    beforeEach(() => {
+        const options = {
+            digestAuth: 'admin:admin',
+            method: 'GET',
+        };
 
-	it('should log in via basic auth using Cypress visit argument', () => {
-		cy.visit('/basic_auth/', {
-			auth: {
-				username: 'admin',
-				password: 'admin',
-			},
-		});
-		cy.get('.example p').should(
-			'contain.text',
-			'Congratulations! You must have the proper credentials.',
-		);
-	});
+        // Get the digest auth response before each test
+        cy.task('handleDigestAuth', {
+            url: 'http://localhost:7080/digest_auth',
+            options
+        }).then((result: any) => {
+            const { res, data } = result;
 
-	it('should login in via basic auth', () => {
-		cy.intercept('GET', '/basic_auth/', (req) => {
-			const credentials: string = btoa('admin:admin');
-			req.headers['Authorization'] = `Basic ${credentials}`;
-		}).as('authRequest');
-		cy.visit('/basic_auth/');
-		cy.wait('@authRequest');
-		cy.get('.example p').should(
-			'contain.text',
-			'Congratulations! You must have the proper credentials.',
-		);
-	});
+            // Set up intercept with the pre-fetched response
+            cy.intercept('GET', '**/digest_auth', {
+                statusCode: res.statusCode,
+                headers: res.headers,
+                body: data
+            }).as('digestAuth');
+        });
+    });
+
+    it('should handle digest auth', () => {
+        cy.visit('/digest_auth');
+        cy.wait('@digestAuth');
+        cy.get('h3').should('contain', 'Digest Auth');
+        cy.get('.example p').should(
+            'contain.text',
+            'Congratulations! You must have the proper credentials.',
+        );
+    });
 });
